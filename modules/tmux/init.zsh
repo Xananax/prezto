@@ -33,11 +33,15 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
 
   # Attach to the 'prezto' session or to the last session used.
   exec tmux attach-session
+
+  if ( [[ -n "$SSH_TTY" ]] && zstyle -t ':prezto:module:tmux:auto-start' remote); then
+    tmux source-file .tmux.ssh.conf
+  fi
+
 fi
 
-#
-# Aliases
-#
+#Aliases
+
 
 alias tmuxa='tmux attach-session'
 alias tmuxl='tmux list-sessions'
